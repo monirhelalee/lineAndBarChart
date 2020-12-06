@@ -8,13 +8,13 @@ class BarChartSample extends StatefulWidget {
 
 class BarChartSampleState extends State<BarChartSample> {
   final List<double> monthlyData = [
-    5.0,
+    35.0,
     6.0,
     5.0,
-    7.0,
+    17.0,
     0,
     41.0,
-    6.0,
+    26.0,
     10.0,
     15.0,
     30.0,
