@@ -7,8 +7,20 @@ class BarChartSample extends StatefulWidget {
 }
 
 class BarChartSampleState extends State<BarChartSample> {
-
-  final List<double> monthlyData = [5.0, 6.0, 5.0, 7.0, 0, 41.0, 6.0,10.0,15.0,30.0,20.0,10.0];
+  final List<double> monthlyData = [
+    5.0,
+    6.0,
+    5.0,
+    7.0,
+    0,
+    41.0,
+    6.0,
+    10.0,
+    15.0,
+    30.0,
+    20.0,
+    10.0
+  ];
   int touchedIndex;
 
   @override
@@ -17,7 +29,15 @@ class BarChartSampleState extends State<BarChartSample> {
       height: 350,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18.0),
-        color: const Color(0xff81e5cd),
+        //color: const Color(0xff81e5cd),
+        gradient: LinearGradient(
+          colors: const [
+            Color(0xff80cbc4),
+            Colors.yellow,
+          ],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        ),
       ),
       margin: EdgeInsets.all(5.0),
       padding: const EdgeInsets.all(10.0),
@@ -59,15 +79,15 @@ class BarChartSampleState extends State<BarChartSample> {
   }
 
   BarChartGroupData _buildBar(
-      int x,
-      double y, {
-        bool isTouched = false,
-      }) {
+    int x,
+    double y, {
+    bool isTouched = false,
+  }) {
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
-          y: y,
+          y: isTouched ? y + 1 : y,
           width: 22,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
@@ -82,7 +102,7 @@ class BarChartSampleState extends State<BarChartSample> {
   List<BarChartGroupData> _buildAllBars() {
     return List.generate(
       monthlyData.length,
-          (index) => _buildBar(index, monthlyData[index],
+      (index) => _buildBar(index, monthlyData[index],
           isTouched: index == touchedIndex),
     );
   }
@@ -189,7 +209,6 @@ class BarChartSampleState extends State<BarChartSample> {
             case 11:
               month = 'December';
               break;
-
           }
           return BarTooltipItem(
             month + '\n' + (rod.y).toString(),
@@ -212,7 +231,7 @@ class BarChartSampleState extends State<BarChartSample> {
   }
 }
 
-double sum(List<double>lst){
+double sum(List<double> lst) {
   double s = 0;
   for (var i = 0; i < lst.length; i++) {
     s += lst[i];

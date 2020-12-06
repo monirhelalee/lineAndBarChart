@@ -31,8 +31,8 @@ class LineChartSampleState extends State<LineChartSample> {
         borderRadius: const BorderRadius.all(Radius.circular(18)),
         gradient: LinearGradient(
           colors: const [
+            Colors.yellow,
             Color(0xff80cbc4),
-            Color(0xff46426c),
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
@@ -145,7 +145,7 @@ class LineChartSampleState extends State<LineChartSample> {
         FlSpot(29, dailyData[8]),
         FlSpot(30, dailyData[9]),
       ],
-      isCurved: true,
+      isCurved: false,
       colors: [
         const Color(0xffaa4cfc),
       ],
