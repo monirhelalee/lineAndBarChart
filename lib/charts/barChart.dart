@@ -25,56 +25,60 @@ class BarChartSampleState extends State<BarChartSample> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 350,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18.0),
-        //color: const Color(0xff81e5cd),
-        gradient: LinearGradient(
-          colors: const [
-            Color(0xff80cbc4),
-            Colors.yellow,
-          ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
-      ),
-      margin: EdgeInsets.all(5.0),
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Monthly Publish',
-            style: TextStyle(
-                color: const Color(0xff0f4a3c),
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            'Total: ${sum(monthlyData).floor()}',
-            style: TextStyle(
-                color: const Color(0xff379982),
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: BarChart(
-                mainBarData(),
-              ),
+    return ListView(
+      children: [
+        Container(
+          height: 350,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18.0),
+            //color: const Color(0xff81e5cd),
+            gradient: LinearGradient(
+              colors: const [
+                Color(0xff80cbc4),
+                Colors.yellow,
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
             ),
           ),
-        ],
-      ),
+          margin: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Monthly Publish',
+                style: TextStyle(
+                    color: const Color(0xff0f4a3c),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                'Total: ${sum(monthlyData).floor()}',
+                style: TextStyle(
+                    color: const Color(0xff379982),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: BarChart(
+                    mainBarData(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pub_chart/charts/barChart.dart';
 import 'package:pub_chart/charts/lineChart.dart';
+import 'package:pub_chart/test/testList.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,24 +11,36 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Publisher Chart'),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-            child: Column(
-          children: [
-            LineChartSample(),
-            SizedBox(
-              height: 10,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.teal,
+            title: Text("Publisher Chart"),
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: "Daily Chart",
+                ),
+                Tab(
+                  text: "Monthly Chart",
+                ),
+                Tab(
+                  text: "Test",
+                ),
+              ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            BarChartSample(),
-          ],
-        )),
+          ),
+          body: TabBarView(
+            children: [
+              LineChartSample(),
+              BarChartSample(),
+              TestList(),
+            ],
+          ),
+        ),
       ),
     );
   }
