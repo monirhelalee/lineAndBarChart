@@ -28,7 +28,7 @@ class BarChartSampleState extends State<BarChartSample> {
     return ListView(
       children: [
         Container(
-          height: 350,
+          height: 400,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18.0),
             //color: const Color(0xff81e5cd),

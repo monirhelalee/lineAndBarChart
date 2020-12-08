@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pub_chart/test/publishInfo.dart';
-import 'package:pub_chart/test/strings.dart';
+import 'package:pub_chart/charts/strings.dart';
 
 // ignore: camel_case_types
 class API_Manager {

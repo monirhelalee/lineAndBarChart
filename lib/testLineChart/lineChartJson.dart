@@ -3,7 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pub_chart/test/publishInfo.dart';
-import 'package:pub_chart/test/strings.dart';
+import 'package:pub_chart/charts/strings.dart';
 
 import 'package:pub_chart/test/apiManager.dart';
 

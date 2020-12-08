@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pub_chart/charts/barChart.dart';
-import 'package:pub_chart/charts/lineChart.dart';
+import 'package:pub_chart/datePicker/datePickerTest.dart';
+import 'package:pub_chart/testLineChart/lineChart.dart';
+import 'package:pub_chart/charts/lineChart2.dart';
 import 'package:pub_chart/test/testList.dart';
+
+import 'testLineChart/line3.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -28,16 +32,16 @@ class _HomeState extends State<Home> {
                   text: "Monthly Chart",
                 ),
                 Tab(
-                  text: "Test",
+                  text: "Date Picker",
                 ),
               ],
             ),
           ),
           body: TabBarView(
             children: [
-              LineChartSample(),
+              LineChartSample2(),
               BarChartSample(),
-              TestList(),
+              DatePick(),
             ],
           ),
         ),
