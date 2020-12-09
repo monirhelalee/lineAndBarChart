@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:pub_chart/monthPicker/monthPic.dart';
 
 class BarChartSample extends StatefulWidget {
   @override
@@ -27,6 +28,7 @@ class BarChartSampleState extends State<BarChartSample> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        MonthPic(),
         Container(
           height: 400,
           decoration: BoxDecoration(
@@ -118,6 +120,7 @@ class BarChartSampleState extends State<BarChartSample> {
       borderData: FlBorderData(
         show: false,
       ),
+      //data
       barGroups: _buildAllBars(),
     );
   }

@@ -17,7 +17,7 @@ class _DatePickState extends State<DatePick> {
       context: context,
       initialDate: _date,
       firstDate: DateTime(2018),
-      lastDate: DateTime(2099),
+      lastDate: _date1,
     );
 
     if (picked != null && picked != _date) {
@@ -31,8 +31,8 @@ class _DatePickState extends State<DatePick> {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: _date1,
-      firstDate: DateTime(2018),
-      lastDate: DateTime(2099),
+      firstDate: _date,
+      lastDate: DateTime.now(),
     );
 
     if (picked != null && picked != _date1) {
@@ -49,18 +49,27 @@ class _DatePickState extends State<DatePick> {
 
     return SingleChildScrollView(
       child: Container(
+        margin: EdgeInsets.all(5.0),
         //color: Colors.green,
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
                     Container(
-                      color: Colors.redAccent,
+                      padding: EdgeInsets.all(3),
+                      height: 75,
+                      width: 115,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(18)),
+                        border: Border.all(color: Colors.black),
+                      ),
                       child: Column(
                         children: [
-                          Text("Start Date"),
+                          Text("From"),
                           FlatButton(
                             child: Text("$_formatDate"),
                             onPressed: () {
@@ -75,10 +84,17 @@ class _DatePickState extends State<DatePick> {
                 Column(
                   children: [
                     Container(
-                      color: Colors.greenAccent,
+                      padding: EdgeInsets.all(3),
+                      height: 75,
+                      width: 115,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(18)),
+                        border: Border.all(color: Colors.black),
+                      ),
                       child: Column(
                         children: [
-                          Text("End Date"),
+                          Text("To"),
                           FlatButton(
                             child: Text("$_formatDate1"),
                             onPressed: () {
@@ -93,10 +109,17 @@ class _DatePickState extends State<DatePick> {
                 Column(
                   children: [
                     Container(
-                      color: Colors.blueAccent,
+                      padding: EdgeInsets.all(3),
+                      height: 75,
+                      width: 115,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(18)),
+                        border: Border.all(color:Colors.black),
+                        color: Colors.yellow,
+                      ),
                       child: FlatButton(
-                        child: Text("Confirm"),
-                        onPressed: (){
+                        child: Text("Filter"),
+                        onPressed: () {
                           setState(() {
                             print("button pressed");
                           });

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pub_chart/charts/barChart.dart';
 import 'package:pub_chart/datePicker/datePickerTest.dart';
+import 'package:pub_chart/monthPicker/monthPic.dart';
+import 'package:pub_chart/monthPicker/monthPickerTest.dart';
+import 'package:pub_chart/monthPicker/testM.dart';
 import 'package:pub_chart/testLineChart/lineChart.dart';
 import 'package:pub_chart/charts/lineChart2.dart';
 import 'package:pub_chart/test/testList.dart';
 
+import 'charts/barChartSample.dart';
 import 'testLineChart/line3.dart';
 
 class Home extends StatefulWidget {
@@ -41,7 +45,7 @@ class _HomeState extends State<Home> {
             children: [
               LineChartSample2(),
               BarChartSample(),
-              DatePick(),
+              SearchPage(),
             ],
           ),
         ),

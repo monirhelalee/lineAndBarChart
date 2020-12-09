@@ -8,32 +8,32 @@ import 'package:pub_chart/charts/strings.dart';
 import 'package:pub_chart/test/apiManager.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class PubData {
-  PubData(this.date, this.publishNo);
+class PubMonthData {
+  PubMonthData(this.month, this.publishNo);
 
-  final String date;
+  final String month;
   final double publishNo;
 
-  factory PubData.fromJson(Map<String, dynamic> parsedJson) {
-    return PubData(
-      parsedJson['date'].toString(),
+  factory PubMonthData.fromJson(Map<String, dynamic> parsedJson) {
+    return PubMonthData(
+      parsedJson['month'].toString(),
       parsedJson['publishNo'] as double,
     );
   }
 }
 
-class LineChartSample2 extends StatefulWidget {
+class BarChartSample2 extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => LineChartSample2State();
+  State<StatefulWidget> createState() => BarChartSample2State();
 }
 
-class LineChartSample2State extends State<LineChartSample2> {
-  List<PubData> chartData = [];
+class BarChartSample2State extends State<BarChartSample2> {
+  List<PubMonthData> barData = [];
 
-  Future<PubData> getData() async {
+  Future<PubMonthData> getData() async {
     var client = http.Client();
 
-    var response = await client.get(Strings.pub_url);
+    var response = await client.get(Strings.pub_month_url);
     if (response.statusCode == 200) {
       var jsonString = response.body;
       var jsonMap = json.decode(jsonString);
@@ -41,7 +41,7 @@ class LineChartSample2State extends State<LineChartSample2> {
       setState(() {
         //int y = 0;
         for (Map i in jsonMap) {
-          chartData.add(PubData.fromJson(i));
+          barData.add(PubMonthData.fromJson(i));
           //print(chartData[y].date);
           //y = y+1;
         }
@@ -129,15 +129,15 @@ class LineChartSample2State extends State<LineChartSample2> {
                     //isTransposed: true,
                     series: <ChartSeries>[
                       // Initialize line series
-                      LineSeries<PubData, String>(
+                      ColumnSeries<PubMonthData, String>(
                         // animationDuration: 2000,
                         // onRendererCreated: (ChartSeriesController controller) {
                         //   _chartSeriesController = controller;
                         // },
 
-                        dataSource: chartData,
-                        xValueMapper: (PubData pd, _) => pd.date,
-                        yValueMapper: (PubData pd, _) => pd.publishNo,
+                        dataSource: barData,
+                        xValueMapper: (PubMonthData pd, _) => pd.month,
+                        yValueMapper: (PubMonthData pd, _) => pd.publishNo,
                         dataLabelSettings: DataLabelSettings(
                           isVisible: true,
                           textStyle: TextStyle(fontWeight: FontWeight.w400),
