@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:pub_chart/datePicker/datePickerTest.dart';
-import 'package:pub_chart/test/publishInfo.dart';
 import 'package:pub_chart/charts/strings.dart';
-import 'package:pub_chart/test/apiManager.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PubData {
@@ -28,9 +26,45 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class LineChartSample2State extends State<LineChartSample2> {
+  DateTime _date = DateTime.now();
+  DateTime _date1 = DateTime.now();
+
+  //DateTime _lastDate;
+
+  Future<Null> selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(2018),
+      lastDate: _date1,
+    );
+
+    if (picked != null && picked != _date) {
+      setState(() {
+        _date = picked;
+      });
+    }
+  }
+
+  Future<Null> selectDate1(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _date1,
+      firstDate: _date,
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null && picked != _date1) {
+      setState(() {
+        _date1 = picked;
+      });
+    }
+  }
+
   List<PubData> chartData = [];
 
   Future<PubData> getData() async {
+    chartData.clear();
     var client = http.Client();
 
     var response = await client.get(Strings.pub_url);
@@ -58,9 +92,97 @@ class LineChartSample2State extends State<LineChartSample2> {
   @override
   Widget build(BuildContext context) {
     ChartSeriesController _chartSeriesController;
+    String _formatDate = DateFormat("dd/MM/yyyy").format(_date);
+    String _formatDate1 = DateFormat("dd/MM/yyyy").format(_date1);
     return ListView(
       children: [
-        DatePick(),
+        Container(
+          margin: EdgeInsets.all(5.0),
+          //color: Colors.green,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: Column(
+                          children: [
+                            Text("From Date",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                            FlatButton(
+                              child: Text("$_formatDate"),
+                              onPressed: () {
+                                selectDate(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: Column(
+                          children: [
+                            Text("To Date",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                            FlatButton(
+                              child: Text("$_formatDate1"),
+                              onPressed: () {
+                                selectDate1(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                          color: Colors.yellow,
+                        ),
+                        child: FlatButton(
+                          child: Text("Filter",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                          onPressed: () {
+                            setState(() {
+                              print("button pressed");
+                              getData();
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         Container(
           height: 400,
           margin: EdgeInsets.all(5.0),
@@ -91,17 +213,6 @@ class LineChartSample2State extends State<LineChartSample2> {
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 2,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "total",
-                //'Total: ${sum(dailyData).floor()}',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  //letterSpacing: 2,
                 ),
                 textAlign: TextAlign.center,
               ),
