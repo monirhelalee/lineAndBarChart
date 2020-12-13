@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:pub_chart/monthPicker/monthPic.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 
 class Bar2 extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
+  // ignore: prefer_const_constructors_in_immutable
   Bar2({Key key}) : super(key: key);
 
   @override
@@ -13,9 +13,16 @@ class Bar2 extends StatefulWidget {
 }
 
 class _Bar2State extends State<Bar2> {
-  List<SalesData> chartData = [];
 
+  String dropdownValueYear1 = DateTime.now().year.toString();
+  String dropdownValueYear2 = DateTime.now().year.toString();
+  String dropdownValueMonth1 = DateFormat.MMM().format(DateTime.now());
+  String dropdownValueMonth2 = DateFormat.MMM().format(DateTime.now());
+
+
+  List<SalesData> chartData = [];
   Future<SalesData> getBarData() async {
+    chartData.clear();
     var str =
         "https://raw.githubusercontent.com/voidMonir/dummyJson/main/monthlyPublish.json";
     var client = http.Client();
@@ -42,7 +49,232 @@ class _Bar2State extends State<Bar2> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        MonthPic(),
+        Container(
+          margin: EdgeInsets.all(5.0),
+          //color: Colors.green,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "From Month",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              children: [
+                                DropdownButton<String>(
+                                  value: dropdownValueMonth1,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValueMonth1 = newValue;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  items: <String>[
+                                    'Jan',
+                                    'Feb',
+                                    'Mar',
+                                    'Apr',
+                                    'May',
+                                    'Jun',
+                                    'Jul',
+                                    'Aug',
+                                    'Sep',
+                                    'Oct',
+                                    'Nov',
+                                    'Dec'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                                DropdownButton<String>(
+                                  value: dropdownValueYear1,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValueYear1 = newValue;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  items: <String>[
+                                    (DateTime.now().year - 12).toString(),
+                                    (DateTime.now().year - 11).toString(),
+                                    (DateTime.now().year - 10).toString(),
+                                    (DateTime.now().year - 9).toString(),
+                                    (DateTime.now().year - 8).toString(),
+                                    (DateTime.now().year - 7).toString(),
+                                    (DateTime.now().year - 6).toString(),
+                                    (DateTime.now().year - 5).toString(),
+                                    (DateTime.now().year - 4).toString(),
+                                    (DateTime.now().year - 3).toString(),
+                                    (DateTime.now().year - 2).toString(),
+                                    (DateTime.now().year - 1).toString(),
+                                    (DateTime.now().year).toString()
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "To Month",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              children: [
+                                DropdownButton<String>(
+                                  value: dropdownValueMonth2,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValueMonth2 = newValue;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  items: <String>[
+                                    'Jan',
+                                    'Feb',
+                                    'Mar',
+                                    'Apr',
+                                    'May',
+                                    'Jun',
+                                    'Jul',
+                                    'Aug',
+                                    'Sep',
+                                    'Oct',
+                                    'Nov',
+                                    'Dec'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                                DropdownButton<String>(
+                                  value: dropdownValueYear2,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValueYear2 = newValue;
+                                    });
+                                  },
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  items: <String>[
+                                    (DateTime.now().year - 12).toString(),
+                                    (DateTime.now().year - 11).toString(),
+                                    (DateTime.now().year - 10).toString(),
+                                    (DateTime.now().year - 9).toString(),
+                                    (DateTime.now().year - 8).toString(),
+                                    (DateTime.now().year - 7).toString(),
+                                    (DateTime.now().year - 6).toString(),
+                                    (DateTime.now().year - 5).toString(),
+                                    (DateTime.now().year - 4).toString(),
+                                    (DateTime.now().year - 3).toString(),
+                                    (DateTime.now().year - 2).toString(),
+                                    (DateTime.now().year - 1).toString(),
+                                    (DateTime.now().year).toString()
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        height: 75,
+                        width: 115,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(18)),
+                          border: Border.all(color: Colors.black),
+                          color: Colors.yellow,
+                        ),
+                        child: FlatButton(
+                          child: Text(
+                            "Filter",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              print("button pressed");
+                              getBarData();
+
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         Container(
           height: 350,
           margin: EdgeInsets.all(5.0),
@@ -83,31 +315,15 @@ class _Bar2State extends State<Bar2> {
                     height: 400,
                     child: SfCartesianChart(
                       enableAxisAnimation: true,
-                      //title: ChartTitle(text: "Monthly Chart"),
                       tooltipBehavior: TooltipBehavior(
                         enable: true,
-                        //activationMode: ActivationMode.longPress,
                       ),
                       primaryXAxis: CategoryAxis(
                         labelRotation: 300,
-                        // title: AxisTitle(
-                        //   text: 'Month',
-                        //   textStyle: TextStyle(
-                        //       color: Colors.black,
-                        //       fontSize: 14,
-                        //       fontStyle: FontStyle.italic,
-                        //       fontWeight: FontWeight.w300),
-                        // ),
+                        labelStyle: TextStyle(fontWeight: FontWeight.bold, color:Colors.black),
                       ),
                       primaryYAxis: NumericAxis(
-                        // title: AxisTitle(
-                        //   text: 'Number of Publish',
-                        //   textStyle: TextStyle(
-                        //       color: Colors.black,
-                        //       fontSize: 14,
-                        //       fontStyle: FontStyle.italic,
-                        //       fontWeight: FontWeight.w300),
-                        // ),
+                        labelStyle: TextStyle(fontWeight: FontWeight.bold, color:Colors.black),
                       ),
                       //legend: Legend(isVisible: true),
                       series: <ChartSeries>[
@@ -117,7 +333,6 @@ class _Bar2State extends State<Bar2> {
                           yValueMapper: (SalesData series, _) =>
                               series.publishNo,
                           name: "Publisher",
-                          //legendIconType: LegendIconType.diamond,
                           dataLabelSettings: DataLabelSettings(
                             isVisible: true,
                           ),

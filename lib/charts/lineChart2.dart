@@ -76,8 +76,6 @@ class LineChartSample2State extends State<LineChartSample2> {
         //int y = 0;
         for (Map i in jsonMap) {
           chartData.add(PubData.fromJson(i));
-          //print(chartData[y].date);
-          //y = y+1;
         }
       });
     }
@@ -224,41 +222,32 @@ class LineChartSample2State extends State<LineChartSample2> {
                   padding: const EdgeInsets.only(right: 16.0, left: 6.0),
                   child: SfCartesianChart(
                     enableAxisAnimation: true,
-                    //legend: Legend(isVisible: true),
                     tooltipBehavior: TooltipBehavior(
                       enable: true,
                     ),
                     primaryXAxis: CategoryAxis(
                       labelRotation: 320,
-                      //labelRotation: 90,
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold, color:Colors.black),
                       interval: 2,
                       minorTicksPerInterval: 3,
-                      //maximum:
-                      //minimum:
                     ),
-                    //borderWidth: 4,
-                    //isTransposed: true,
+                    primaryYAxis: NumericAxis(
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold, color:Colors.black),
+                    ),
+
                     series: <ChartSeries>[
                       // Initialize line series
                       LineSeries<PubData, String>(
-                        // animationDuration: 2000,
-                        // onRendererCreated: (ChartSeriesController controller) {
-                        //   _chartSeriesController = controller;
-                        // },
-
                         dataSource: chartData,
                         xValueMapper: (PubData pd, _) => pd.date,
                         yValueMapper: (PubData pd, _) => pd.publishNo,
+                        name: "Publisher",
                         dataLabelSettings: DataLabelSettings(
                           isVisible: true,
                           textStyle: TextStyle(fontWeight: FontWeight.w400),
-
-                          //useSeriesColor: true,
                         ),
-                        //animationDuration: 1000,
                         markerSettings: MarkerSettings(
                           isVisible: true,
-                          //shape: DataMarkerType.diamond,
                         ),
                         width: 5,
                       ),
