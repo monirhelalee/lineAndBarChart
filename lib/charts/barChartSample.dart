@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 
 class Bar2 extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutable
-  Bar2({Key key}) : super(key: key);
-
   @override
   _Bar2State createState() => _Bar2State();
 }
@@ -20,8 +18,8 @@ class _Bar2State extends State<Bar2> {
   String dropdownValueMonth2 = DateFormat.MMM().format(DateTime.now());
 
 
-  List<SalesData> chartData = [];
-  Future<SalesData> getBarData() async {
+  List<BarData> chartData = [];
+  Future<BarData> getBarData() async {
     chartData.clear();
     var str =
         "https://raw.githubusercontent.com/voidMonir/dummyJson/main/monthlyPublish.json";
@@ -32,7 +30,7 @@ class _Bar2State extends State<Bar2> {
       var jsonMap = json.decode(jsonString);
       setState(() {
         for (Map i in jsonMap) {
-          chartData.add(SalesData.fromJson(i));
+          chartData.add(BarData.fromJson(i));
           //print(chartData);
         }
       });
@@ -261,7 +259,8 @@ class _Bar2State extends State<Bar2> {
                           ),
                           onPressed: () {
                             setState(() {
-                              print("button pressed");
+                              print(dropdownValueMonth1+','+dropdownValueYear1);
+                              print(dropdownValueMonth2+','+dropdownValueYear2);
                               getBarData();
 
                             });
@@ -327,10 +326,10 @@ class _Bar2State extends State<Bar2> {
                       ),
                       //legend: Legend(isVisible: true),
                       series: <ChartSeries>[
-                        ColumnSeries<SalesData, String>(
+                        ColumnSeries<BarData, String>(
                           dataSource: chartData,
-                          xValueMapper: (SalesData series, _) => series.month,
-                          yValueMapper: (SalesData series, _) =>
+                          xValueMapper: (BarData series, _) => series.month,
+                          yValueMapper: (BarData series, _) =>
                               series.publishNo,
                           name: "Publisher",
                           dataLabelSettings: DataLabelSettings(
@@ -353,14 +352,14 @@ class _Bar2State extends State<Bar2> {
   }
 }
 
-class SalesData {
-  SalesData(this.month, this.publishNo);
+class BarData {
+  BarData(this.month, this.publishNo);
 
   final String month;
   final double publishNo;
 
-  factory SalesData.fromJson(Map<String, dynamic> parsedJson) {
-    return SalesData(
+  factory BarData.fromJson(Map<String, dynamic> parsedJson) {
+    return BarData(
       parsedJson['month'].toString(),
       parsedJson['publishNo'] as double,
     );

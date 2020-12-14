@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:pub_chart/datePicker/datePickerTest.dart';
 import 'package:pub_chart/charts/strings.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -168,7 +167,8 @@ class LineChartSample2State extends State<LineChartSample2> {
                           child: Text("Filter",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           onPressed: () {
                             setState(() {
-                              print("button pressed");
+                              print(_formatDate);
+                              print(_formatDate1);
                               getData();
                             });
                           },
@@ -182,7 +182,7 @@ class LineChartSample2State extends State<LineChartSample2> {
           ),
         ),
         Container(
-          height: 400,
+          height: 350,
           margin: EdgeInsets.all(5.0),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(18)),
@@ -201,9 +201,6 @@ class LineChartSample2State extends State<LineChartSample2> {
               const SizedBox(
                 height: 25,
               ),
-              const SizedBox(
-                height: 25,
-              ),
               const Text(
                 'Daily Publish',
                 style: TextStyle(
@@ -214,9 +211,7 @@ class LineChartSample2State extends State<LineChartSample2> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16.0, left: 6.0),
